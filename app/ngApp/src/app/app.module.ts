@@ -4,22 +4,28 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { UsersComponent } from './users/users.component';
 import { IndexComponent } from './index/index.component';
+import {AuthModule} from "./auth/auth.module";
+import {AuthRoutingModule} from "./auth/auth-routing.module";
+import {ReactiveFormsModule} from "@angular/forms";
+import {UserService} from "./shared/services/users.service";
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsersComponent,
     IndexComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthModule,
+    ReactiveFormsModule,
+    AuthRoutingModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

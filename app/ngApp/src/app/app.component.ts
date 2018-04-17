@@ -5,7 +5,6 @@ import {HttpService} from "./http.service";
 interface User{
   name:string;
   age: number;
-  id: number;
 }
 
 @Component({
@@ -14,8 +13,10 @@ interface User{
   providers:[HttpService]
 })
 export class AppComponent  implements OnInit{
+
+  // @Input() user;
  // user является интерфейсом User,но массивом
- user: User[]=[];
+  user:User [] =[];
   constructor(private httpservice: HttpService ){}
 
 /**Библиотека rsjx оптимизирует наш код, она смотрит если нет никаких слушателей
@@ -23,12 +24,16 @@ export class AppComponent  implements OnInit{
  * на стрим, который возращает метод getUsers*/
   ngOnInit(){
     //указываем, что ожидаем получить уже сам массив юзеров (user: User[])
-    this.httpservice.getUsers().subscribe((user: User[])=>{
-        this.user = user;
-      console.log(user);
-    }
-    );
- /**метод subscribe принимает либо объект либо 3 функкции либо 1 функцию ,
-   которая будет выполненна по завершению стрима */
-  }
+    // this.httpservice.getUsers().subscribe((user: User[])=>{
+    //     this.user = user;
+    //     console.log(user);
+    //   }
+    // );
+
+  this.httpservice.getUserDB().subscribe((user: User[])=>{
+     this.user = user;
+
+    console.log(user);
+         });
+      }
 }
